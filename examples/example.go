@@ -18,21 +18,21 @@ type Content struct {
 
 var (
 	cc = []Content{
-		// {
-		// 	Text: "Hello World",
-		// 	From: language.English,
-		// 	To:   language.Chinese,
-		// },
+		{
+			Text: "Hello World",
+			From: language.English,
+			To:   language.Chinese,
+		},
 		{
 			Text: "اطلع على الكلمات كاملةً",
 			From: language.Arabic,
 			To:   language.Chinese,
 		},
-		// {
-		// 	Text: "床前明月光，疑是地上霜",
-		// 	From: language.Chinese,
-		// 	To:   language.English,
-		// },
+		{
+			Text: "床前明月光，疑是地上霜",
+			From: language.Chinese,
+			To:   language.English,
+		},
 		{
 			Text: "危楼高百尺，手可摘星辰\n不敢高声语，恐惊天上人",
 			From: language.Chinese,
@@ -56,7 +56,7 @@ func main() {
 			}
 
 			duration := time.Now().Sub(start).Milliseconds()
-			log.Printf("Original Text: %s, \nTranslated Text: %s, \nTranslated Tongue: %s, \ntimeDuration: %d millis\n\n\n", c.Text, result.ResponseText, result.ResponseTongue, duration)
+			log.Printf("Original Text: %s \nTranslated Text: %s \nTranslated Tongue: %s \ntimeDuration: %d millis\n\n\n", c.Text, result.ResponseText, result.ResponseTongue, duration)
 		}()
 	}
 	wg.Wait()

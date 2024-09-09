@@ -181,8 +181,12 @@ func (t Translate) formatResult(body io.Reader) (*TransResult, error) {
 
 		if i == objCount-1 {
 			items := obj.([]any)
-			requestTongue += obj.([]any)[len(items)-1].(string)
-			responseTongue += obj.([]any)[len(items)-2].(string)
+			if rt, ok := obj.([]any)[len(items)-1].(string); ok {
+				requestTongue += rt
+			}
+			if rt, ok := obj.([]any)[len(items)-2].(string); ok {
+				responseTongue += rt
+			}
 		}
 	}
 
