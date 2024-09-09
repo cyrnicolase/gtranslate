@@ -9,14 +9,13 @@ import (
 	"net/url"
 	"time"
 
-	"github.com/joyparty/gokit"
-	"github.com/robertkrimen/otto"
+	"github.com/cyrnicolase/gtranslate/token"
 	"golang.org/x/text/language"
 )
 
 var (
 	defaultOption = Option{
-		GoogleHost: "google.com",
+		GoogleHost: "google.com", // "google.cn"
 		Delay:      0,
 		TryTimes:   2,
 		Timeout:    time.Second * 10,
@@ -30,10 +29,14 @@ var (
 	}
 )
 
-var ttk otto.Value
+var (
+	tkk string
+
+	GoogleHost = "https://translate.google.com"
+)
 
 func init() {
-	ttk = gokit.MustReturn(otto.ToValue("0"))
+	tkk = token.MustGetTKK()
 }
 
 // NewTranslate is a function to create a new translate
@@ -99,11 +102,7 @@ func (t Translate) requestURL() string {
 }
 
 func (t Translate) buildRequestData(text string, from, to language.Tag) (url.Values, error) {
-	vt, err := otto.ToValue(text)
-	if err != nil {
-		return url.Values{}, fmt.Errorf("convert text to otto value error: %w", err)
-	}
-	token := get(vt, ttk)
+	token := token.GetTK(text, tkk)
 	data := map[string]string{
 		"client": "gtx",
 		"sl":     from.String(),
