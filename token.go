@@ -2,7 +2,7 @@ package gtranslate
 
 import (
 	"fmt"
-	"io/ioutil"
+	"io"
 	"math"
 	"net/http"
 	"regexp"
@@ -11,6 +11,10 @@ import (
 	"time"
 
 	"github.com/robertkrimen/otto"
+)
+
+var (
+	GoogleHost = "google.com"
 )
 
 var vm = otto.New()
@@ -111,7 +115,7 @@ func updateTTK(TTK otto.Value) (otto.Value, error) {
 		return otto.UndefinedValue(), err
 	}
 
-	body, err := ioutil.ReadAll(resp.Body)
+	body, err := io.ReadAll(resp.Body)
 	if err != nil {
 		return otto.UndefinedValue(), err
 	}
@@ -141,5 +145,4 @@ func get(text otto.Value, ttk otto.Value) string {
 	}
 	sTk := strings.Replace(tk.String(), "&tk=", "", -1)
 	return sTk
-
 }

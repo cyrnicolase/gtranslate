@@ -7,4 +7,7 @@ require (
 	golang.org/x/text v0.18.0
 )
 
-require gopkg.in/sourcemap.v1 v1.0.5 // indirect
+require (
+	github.com/joyparty/gokit v0.0.0-20240904125910-d097e00f6df7
+	gopkg.in/sourcemap.v1 v1.0.5 // indirect
+)
